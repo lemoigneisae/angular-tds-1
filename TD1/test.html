@@ -18,11 +18,11 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-<script src="app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+<script src="app/NoteApp.js"></script>
+<script src="app/NoteController.js"></script>
 </head>
-<body>
+<body ng-app="TD1" data-ng-controller="controllerTD1 as tdCtrl">
 
 	<div class="container" style="margin-top:200px;">
 		<div class="ng-scope" id="note">
@@ -31,15 +31,26 @@
 				<div class="panel-body">
 					<div class="form-group">
 					<p><label for="message">Note :</label>
-						<textarea style="" data-ng-change="updateInfo()" name="message" id="message" data-ng-model="message" cols="40" rows="5" class="form-control ng-pristine ng-valid ng-valid-maxlength ng-touched" maxlength="100"></textarea>
+						<textarea style="" data-ng-change="tdCtrl.count()" name="message" id="message" data-ng-model="tdCtrl.message" cols="40" rows="5" class="form-control ng-pristine ng-valid ng-valid-maxlength ng-touched" maxlength="100"></textarea>
 					</p>
 					<p>
 						<button data-ng_click="save()" class="btn btn-primary">Enregistrer</button>
-						<button data-ng-click="clear()" class="btn btn-primary">Effacer</button>
+						<button data-ng-click="tdCtrl.clear()" class="btn btn-primary">Effacer</button>
 					</p>
-						<div class="alert alert-info alert-dismissible" role="alert">Nombre de caractères restant : <span class="ng-binding" data-ng-bind="count()">100</span></div>
-						<div ng-class="{'alert-info':message=='','alert-warning':message!='' &amp;&amp; info!='Note sauvegardée','alert-danger':count()<10 &amp;&amp; info!='Note sauvegardée','alert-success':info=='Note sauvegardée'}" class="alert alert-dismissible alert-info ng-hide" role="alert" data-ng-show="info">
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="info=''"><span aria-hidden="true">×</span></button>
+						<div ng-class="{	'alert-warning':tdCtrl.caract<50 ,
+											'alert-danger':tdCtrl.caract<20 
+										}" class="alert alert-info alert-dismissible" role="alert">Nombre de caractères restant : {{tdCtrl.caract}}</div>
+						
+						<div ng-class="{
+											'alert-info':tdCtrl.message=='',
+											'alert-warning':tdCtrl.message!='' &amp;&amp; info!='Note sauvegardée',
+											'alert-danger':tdCtrl.count()<10 &amp;&amp; info!='Note sauvegardée',
+											'alert-success':info=='Note sauvegardée'
+											
+										}" class="alert alert-dismissible alert-info ng-hide" role="alert" data-ng-show="tdCtrl.info || tdCtrl.message">
+										Note modifiée
+										
+							<!--<button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="info=''"><span aria-hidden="true">×</span></button>-->
 							<span class="ng-binding"></span>
 						</div>		
 					</div>
