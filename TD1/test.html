@@ -1,18 +1,52 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="HelloApp">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Hello</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+<meta charset="UTF-8">
+<title>TD1 Exo 1</title>
+<style>
+
+</style>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+<script src="app.js"></script>
 </head>
 <body>
-    <div ng-controller="HelloController as hello">
-        <input type="text" ng-model="hello.message">
-        <br> Message : {{hello.message}}
-    </div>
- 
-    <script>
-        angular.module("HelloApp",[]).controller("HelloController",function(){this.message="Hello world";});
-    </script>
+
+	<div class="container" style="margin-top:200px;">
+		<div class="ng-scope" id="note">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Ex 1 : Note Application</div>
+				<div class="panel-body">
+					<div class="form-group">
+					<p><label for="message">Note :</label>
+						<textarea style="" data-ng-change="updateInfo()" name="message" id="message" data-ng-model="message" cols="40" rows="5" class="form-control ng-pristine ng-valid ng-valid-maxlength ng-touched" maxlength="100"></textarea>
+					</p>
+					<p>
+						<button data-ng_click="save()" class="btn btn-primary">Enregistrer</button>
+						<button data-ng-click="clear()" class="btn btn-primary">Effacer</button>
+					</p>
+						<div class="alert alert-info alert-dismissible" role="alert">Nombre de caractères restant : <span class="ng-binding" data-ng-bind="count()">100</span></div>
+						<div ng-class="{'alert-info':message=='','alert-warning':message!='' &amp;&amp; info!='Note sauvegardée','alert-danger':count()<10 &amp;&amp; info!='Note sauvegardée','alert-success':info=='Note sauvegardée'}" class="alert alert-dismissible alert-info ng-hide" role="alert" data-ng-show="info">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="info=''"><span aria-hidden="true">×</span></button>
+							<span class="ng-binding"></span>
+						</div>		
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 </body>
 </html>
