@@ -19,6 +19,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.min.js"></script>
 <script src="app/NoteApp.js"></script>
 <script src="app/NoteController.js"></script>
 </head>
@@ -34,7 +35,7 @@
 						<textarea style="" data-ng-change="tdCtrl.count()" name="message" id="message" data-ng-model="tdCtrl.message" cols="40" rows="5" class="form-control ng-pristine ng-valid ng-valid-maxlength ng-touched" maxlength="100"></textarea>
 					</p>
 					<p>
-						<button data-ng_click="save()" class="btn btn-primary">Enregistrer</button>
+						<button data-ng_click="tdCtrl.save()" class="btn btn-primary">Enregistrer</button>
 						<button data-ng-click="tdCtrl.clear()" class="btn btn-primary">Effacer</button>
 					</p>
 						<div ng-class="{	'alert-warning':tdCtrl.caract<50 ,
@@ -43,16 +44,17 @@
 						
 						<div ng-class="{
 											'alert-info':tdCtrl.message=='',
-											'alert-warning':tdCtrl.message!='' &amp;&amp; info!='Note sauvegardée',
-											'alert-danger':tdCtrl.count()<10 &amp;&amp; info!='Note sauvegardée',
-											'alert-success':info=='Note sauvegardée'
+											'alert-warning':tdCtrl.message!='' &amp;&amp; tdCtrl.info!='Note sauvegardée',
+											'alert-danger':tdCtrl.count()<10 &amp;&amp; tdCtrl.info!='Note sauvegardée',
+											'alert-success':tdCtrl.info=='Note sauvegardée'
 											
-										}" class="alert alert-dismissible alert-info ng-hide" role="alert" data-ng-show="tdCtrl.info || tdCtrl.message">
-										Note modifiée
-										
-							<!--<button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="info=''"><span aria-hidden="true">×</span></button>-->
-							<span class="ng-binding"></span>
-						</div>		
+										}" class="alert alert-dismissible alert-info ng-hide" role="alert" data-ng-show="tdCtrl.message">
+
+
+
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="tdCtrl.info=''"><span aria-hidden="true">×</span></button>
+							<span class="ng-binding">{{tdCtrl.info}}</span>
+						</div>
 					</div>
 				</div>
 			</div>
