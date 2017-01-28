@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>TD1 Exo 2</title>
+    <style>
+
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.min.js"></script>
+    <script src="app/servicesApp.js"></script>
+    <script src="app/servicesApp.js"></script>
+    <script src="app/servicesController.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body ng-app="TD1" data-ng-controller="controllerTD1 as tdCtrl">
+<div class="container">
+
+    <!-- ngView:  --><div ng-view="" class="toggle ng-scope"><form id="services" class="ng-pristine ng-valid ng-scope">
+
+    <h1>Services</h1>
+    <div class="alert alert-info">
+        <span>Choisissez les éléments à inclure</span>
+        <p>
+            <ng-pluralize count="tdCtrl.count" when="{0:'Aucun service sélectionné',
+											1:'1 service sélectionné',
+											'other':'{} services sélectionnés'}"></ng-pluralize>
+        </p>
+    </div>
+    <ul>
+        <!-- ngRepeat: service in services --><li  ng-repeat="service in tdCtrl.services" ng-click=" tdCtrl.toggleActive(service); tdCtrl.total()" ng-class="{active:service.active}" class="ng-binding ng-scope" >
+        {{service.name}} <span class="ng-binding">{{service.price | currency}}</span>
+    </li>
+    </ul>
+
+    <div class="total">
+        <!-- Format en currency. -->
+        Total: <span class="ng-binding">{{tdCtrl.toto | currency}}</span>
+    </div>
+    <div>
+        <div class="input-group">
+      <span class="input-group-addon">
+        <input type="checkbox" aria-label="..." ng-model="ckPromo" ng-click="tdCtrl.applyCode()" class="ng-pristine ng-untouched ng-valid">
+      </span>
+            <input type="text" class="form-control ng-pristine ng-untouched ng-valid" aria-label="..." ng-model="codePromo" placeholder="Code promo" ng-keyup="tdCtrl.applyCode()">
+        </div>
+    </div>
+    <div class="total ng-hide" ng-show="ckPromo&amp;&amp;codePromo">
+        Remise :<!-- ngIf: IsNumeric(remise) --><!-- ngIf: !IsNumeric(remise) --><span ng-if="!IsNumeric(tdCtrl.remise)" class="ng-binding ng-scope">{{tdCtrl.promotion}}</span><!-- end ngIf: !IsNumeric(remise) --><br>
+        Total avec remise :<span class="ng-binding">{{tdCtrl.temp}}</span>
+    </div>
+</form></div>
+</div>
+</body>
+</html>
