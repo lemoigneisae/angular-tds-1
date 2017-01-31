@@ -52,14 +52,17 @@
     <div>
         <div class="input-group">
       <span class="input-group-addon">
-        <input type="checkbox" aria-label="..." ng-model="ckPromo" ng-click="tdCtrl.applyCode()" class="ng-pristine ng-untouched ng-valid">
+        <input type="checkbox" aria-label="..." ng-model="tdCtrl.ckPromo" ng-click="tdCtrl.applyCode()" class="ng-pristine ng-untouched ng-valid">
       </span>
-            <input type="text" class="form-control ng-pristine ng-untouched ng-valid" aria-label="..." ng-model="codePromo" placeholder="Code promo" ng-keyup="tdCtrl.applyCode()">
+            <input type="text" class="form-control ng-pristine ng-untouched ng-valid" aria-label="..." ng-model="tdCtrl.codePromo" placeholder="Code promo" ng-keyup="tdCtrl.applyCode()">
         </div>
     </div>
-    <div class="total ng-hide" ng-show="ckPromo&amp;&amp;codePromo">
-        Remise :<!-- ngIf: IsNumeric(remise) --><!-- ngIf: !IsNumeric(remise) --><span ng-if="!IsNumeric(tdCtrl.remise)" class="ng-binding ng-scope">{{tdCtrl.promotion}}</span><!-- end ngIf: !IsNumeric(remise) --><br>
-        Total avec remise :<span class="ng-binding">{{tdCtrl.temp}}</span>
+    <div class="total ng-hide" ng-show="tdCtrl.ckPromo&amp;&amp;tdCtrl.codePromo">
+
+        Remise :<span ng-if="tdCtrl.go" class="ng-binding ng-scope">{{tdCtrl.reduc }}</span>
+                <span ng-if="!tdCtrl.go" class="ng-binding ng-scope">{{tdCtrl.reduc | currency}}</span><br>
+
+        Total avec remise :<span class="ng-binding">{{tdCtrl.toto - tdCtrl.reduc| currency}}</span>
     </div>
 </form></div>
 </div>

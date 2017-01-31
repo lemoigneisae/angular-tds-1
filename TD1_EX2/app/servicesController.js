@@ -4,13 +4,14 @@
 
 var myApp = angular.module('TD1');
 
-myApp.controller('controllerTD1', function(){
+myApp.controller('controllerTD1', function($http){
 
     this.services=Services;
-    this.promo = promo;
-    this.codePromo="";
+    this.promotion="promotion";
     this.count=1;
+    this.reduc="";
     this.toto = 300;
+    this.go = true;
     this.temp="";
     this.remise = "0.15";
 
@@ -29,10 +30,11 @@ myApp.controller('controllerTD1', function(){
 
         });
 
-    }
+    };
 
 
     this.toggleActive = function(service){
+        this.applyCode();
         this.service = service;
         if(this.service.active == true){
             this.service.active = false;
@@ -41,20 +43,33 @@ myApp.controller('controllerTD1', function(){
         }
     };
 
+
+    this.promoExiste = function (promo) {
+        $http.get("./app/promo.json").then(function (response) {
+            angular.forEach(response.data, function (value, key) {
+                if (promo == key) {
+                    self.reduc = value*self.toto;
+                    self.go = false;
+                }
+            });
+        });
+    };
+
+
     this.applyCode = function(){
 
-        for(var i = 0 ; i < promo.length ; i++){
-            this.temp=promo[i];
-        }
+        self.reduc = "Remise non valide";
+        self.go = true;
+        this.promoExiste(this.codePromo);
+
     };
+
+
+
+
+
 });
 
-promo =
-    {
-        "B22":0.05,
-        "AZ":0.01,
-        "UBOAT":0.02
-    }
 
 
 Services=[

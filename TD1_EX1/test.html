@@ -48,11 +48,12 @@
 											'alert-danger':tdCtrl.count()<10 &amp;&amp; tdCtrl.info!='Note sauvegardée',
 											'alert-success':tdCtrl.info=='Note sauvegardée'
 											
-										}" class="alert alert-dismissible alert-info ng-hide" role="alert" data-ng-show="tdCtrl.message&&!tdCtrl.cook">
+										}" class="alert alert-dismissible alert-info ng-hide" role="alert" data-ng-show="tdCtrl.message">
 
 
 
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="tdCtrl.info=''"><span aria-hidden="true">×</span></button>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="tdCtrl.info=''">
+								<span aria-hidden="true">×</span></button>
 							<span class="ng-binding">{{tdCtrl.info}}</span>
 						</div>
 					</div>

@@ -4,7 +4,7 @@ myApp.controller('controllerTD1', ["$cookies",function($cookies){
 
     // Retrieving a cookie
     var favoriteCookie = $cookies.get('Message');
-    this.info="Note modifiée";
+    this.info="";
 	this.caract=100;
     this.message = "";
     this.cook = false;
@@ -23,15 +23,14 @@ myApp.controller('controllerTD1', ["$cookies",function($cookies){
 	};
 
     this.save = function(){
-        if(self.message.length>0){
+        if(self.message.length>0) {
+            self.info = 'Note sauvegardée';
             $cookies.put('Message', self.message);
-            self.info = "Note sauvegardée" ;
         }
 
     };
 
     if($cookies.get('Message')!= null){
-     self.cook = true ;
      self.message = favoriteCookie;
      }
 
