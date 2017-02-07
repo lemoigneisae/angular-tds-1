@@ -1,0 +1,20 @@
+[
+  {
+    "name": "ZUCKERBERG",
+    "firstname": "mark",
+    "mail": "mark@facebook.com",
+    "deleted": false
+  },
+  {
+    "name": "GATES",
+    "firstname": "bill",
+    "mail": "bill@microsoft.com",
+    "deleted": false
+  },
+  {
+    "name": "JOBS",
+    "firstname": "steve",
+    "mail": "steeve@apple.com",
+    "deleted": false
+  }
+]

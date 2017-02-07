@@ -10,6 +10,7 @@ myApp.controller('controllerTD1', function($http){
     this.promotion="promotion";
     this.count=1;
     this.reduc="";
+    this.valeurReduc=0;
     this.toto = 300;
     this.go = true;
     this.temp="";
