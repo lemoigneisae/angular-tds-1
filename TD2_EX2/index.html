@@ -36,13 +36,13 @@
             <input type="text" placeholder="Filtrer..." data-ng-model="q" class="form-control ng-pristine ng-untouched ng-valid">
             <table class="table table-striped" id="lstContact">
                 <tbody><!-- ngRepeat: contact in contacts |NotDeletedFilter |filter:q as results -->
-                <tr contact-elem class="animate-repeat ng-scope" data-ng-repeat="contact in tdCtrl.contacts |filter:q as results">
+                <tr contact-elem class="animate-repeat ng-scope" data-ng-repeat="contact in tdCtrl.contacts |NotDeletedFilter |filter:q as results">
                 </tr>
                 <tr><td colspan="4">
                     <a id="add" href="" data-ng-click="tdCtrl.toAdd()" class="btn btn-primary">Ajouter...</a>
-                    <a id="add" href="" data-ng-show="results.length<contacts.length &amp;&amp; !q" data-ng-click="cancelOne()" class="btn btn-danger ng-hide">
-                        <data-ng-pluralize count="contacts.length-results.length" when="{'one': 'Annuler la suppression.',
-                     'other': 'Annuler les suppressions ({}) .'}">Annuler les suppressions (0) .</data-ng-pluralize>
+                    <a id="add" href="" data-ng-show="tdCtrl.results.length>0 &amp;&amp; !q" data-ng-click="tdCtrl.cancelOne()" class="btn btn-danger ng-hide">
+                        <data-ng-pluralize count="tdCtrl.results.length" when="{'one': 'Annuler la suppression.',
+                     'other': 'Annuler les suppressions ({}) .'}"></data-ng-pluralize>
                     </a></td></tr>
                 </tbody></table>
         </div>
