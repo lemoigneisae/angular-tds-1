@@ -8,13 +8,13 @@ myApp.controller('controllerTD2',['$http', function($http){
     var self = this;
     self.results = [];
     self.contacts = [];
+    self.tmpContact = new Object();
     $http.get("./app/contacts.json").then(
         function (response) {
             self.contacts = response.data;
         });
 
      this.edit=false;
-
 
     this.cancelOne = function(){
         self.results.forEach(function(item, index, object) {
@@ -27,14 +27,40 @@ myApp.controller('controllerTD2',['$http', function($http){
         });
         self.results=[];
     };
+    
 
     this.toAdd = function(){
-        self.edit ="add";
+        if(self.edit!="upd") {
+            self.tmpContact = new Object();
+            self.edit = "add";
+        }
     };
+
+
+    this.Add = function(value){
+    if(value) {
+        if (self.edit == "add") {
+            self.contacts.push(self.tmpContact);
+            self.tmpContact = new Object();
+        } else {
+            self.tmpContact = new Object();
+            self.edit = "";
+        }
+    }
+    };
+
+
 
     this.deleter = function(contact){
         self.results.push(contact);
         contact.deleted = true;
+    };
+
+    this.toUpdate = function(contact){
+        self.edit="upd";
+        console.log(contact);
+        self.tmpContact = contact;
+        console.log(self.tmpContact);
     };
 
 
