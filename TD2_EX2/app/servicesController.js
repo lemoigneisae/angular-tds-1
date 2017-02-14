@@ -27,7 +27,7 @@ myApp.controller('controllerTD2',['$http', function($http){
         });
         self.results=[];
     };
-    
+
 
     this.toAdd = function(){
         if(self.edit!="upd") {
