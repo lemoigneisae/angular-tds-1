@@ -26,7 +26,8 @@
     <link rel="stylesheet" type="text/css" href="css/prism.css">
     <link rel="stylesheet" type="text/css" href="css/css.css">
 </head>
-<body ng-app="TD2" data-ng-controller="controllerTD2 as tdCtrl">
+<div ng-app="TD2" data-ng-controller="controllerTD2 as tdCtrl">
+<div class="container" style="margin-top: 100px; ">
     <div class="panel panel-primary" data-ngcloak="">
         <div class="panel-heading">Ex 3 : Currency Application</div>
         <div class="panel-body">
@@ -39,11 +40,11 @@
                 </select>
                 <input type="button" value="Convertir" class="btn btn-primary" data-ng-click="tdCtrl.getResult()">
                 <input data-ng-model="tdCtrl.result" type="text" class="form-control ng-pristine ng-untouched ng-valid" readonly="readonly" size="5">
-                <div class="checkbox"><label><input type="checkbox" data-ng-model="histo" class="ng-pristine ng-untouched ng-valid">&nbsp;Historique</label></div>
+                <div class="checkbox"><label><input type="checkbox" data-ng-model="tdCtrl.histo" class="ng-pristine ng-untouched ng-valid">&nbsp;Historique</label></div>
             </form>
         </div>
         <div class="container-fluid">
-            <div data-ng-show="histoNotEmpty() &amp;&amp; histo" class="panel panel-default ng-hide">
+            <div data-ng-show="tdCtrl.histoNotEmpty() &amp;&amp; tdCtrl.histo" class="panel panel-default ng-hide">
                 <div class="panel-body">
                     <table class="table table-striped" id="lstHisto" style="table-layout:fixed;width: 100%">
                         <tbody><tr>
@@ -76,6 +77,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
