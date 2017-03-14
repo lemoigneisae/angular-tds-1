@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>TD3 Exo 2</title>
+    <style>
+
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.min.js"></script>
+    <script src="app/servicesApp.js"></script>
+    <script src="app/servicesController.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/prism.css">
+    <link rel="stylesheet" type="text/css" href="css/css.css">
+</head>
+<div drag="{handle: '#title-calc'}" class="container ng-scope ui-draggable" id="calc" style="position: relative;">
+    <div class="panel panel-primary">
+        <div id="title-calc" class="panel-heading ui-draggable-handle">Ex 6 : Calculatrice
+            <input id="btOn" type="button" data-ng-hide="calc.gui.on" class="btn btn-info ng-hide" value="On" data-ng-click="calc.setOn()" title="Allumer la calculatrice">
+        </div>
+        <div id="calc-body" class="panel-body ng-isolate-scope" data-ng-show="calc.gui.on" data-ng-keypress="calc.keypress($event);" tabindex="0" focus-me="true">
+            <div id="sc">
+                <label id="screen" data-ng-bind="calc.gui.screen" class="ng-binding">3/9</label><br>
+                <label id="result" data-ng-bind="calc.gui.result" class="ng-binding">0.3333333333333333</label>
+            </div>
+            <br>
+            <!-- ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="(" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: '('})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value=")" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: ')'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="M" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: 'M'})"><!-- end ngRepeat: op in calc.ops track by $index --><span class="space ng-scope">&nbsp;</span><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="RM" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: 'RM'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="Eteindre la calculatrice" type="button" value="Off" class="btn calcBtn btn-danger ng-scope" data-ng-click="onAdd({element: 'Off'})"><!-- end ngRepeat: op in calc.ops track by $index --><br class="clear ng-scope"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="⇤" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: '⇤'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="CE" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: 'CE'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="C" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: 'C'})"><!-- end ngRepeat: op in calc.ops track by $index --><span class="space ng-scope">&nbsp;</span><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="±" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: '±'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="√x" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: '√x'})"><!-- end ngRepeat: op in calc.ops track by $index --><br class="clear ng-scope"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="7" class="btn calcBtn btn-default ng-scope" data-ng-click="onAdd({element: '7'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="8" class="btn calcBtn btn-default ng-scope" data-ng-click="onAdd({element: '8'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="9" class="btn calcBtn btn-default ng-scope" data-ng-click="onAdd({element: '9'})"><!-- end ngRepeat: op in calc.ops track by $index --><span class="space ng-scope">&nbsp;</span><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="/" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: '/'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="%" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: '%'})"><!-- end ngRepeat: op in calc.ops track by $index --><br class="clear ng-scope"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="4" class="btn calcBtn btn-default ng-scope" data-ng-click="onAdd({element: '4'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="5" class="btn calcBtn btn-default ng-scope" data-ng-click="onAdd({element: '5'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="6" class="btn calcBtn btn-default ng-scope" data-ng-click="onAdd({element: '6'})"><!-- end ngRepeat: op in calc.ops track by $index --><span class="space ng-scope">&nbsp;</span><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="*" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: '*'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="1/x" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: '1/x'})"><!-- end ngRepeat: op in calc.ops track by $index --><br class="clear ng-scope"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="1" class="btn calcBtn btn-default ng-scope" data-ng-click="onAdd({element: '1'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="2" class="btn calcBtn btn-default ng-scope" data-ng-click="onAdd({element: '2'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="3" class="btn calcBtn btn-default ng-scope" data-ng-click="onAdd({element: '3'})"><!-- end ngRepeat: op in calc.ops track by $index --><span class="space ng-scope">&nbsp;</span><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="-" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: '-'})"><!-- end ngRepeat: op in calc.ops track by $index --><br class="clear ng-scope"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="0" class="btn calcBtn colspan btn-default ng-scope" data-ng-click="onAdd({element: '0'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="." class="btn calcBtn btn-default ng-scope" data-ng-click="onAdd({element: '.'})"><!-- end ngRepeat: op in calc.ops track by $index --><span class="space ng-scope">&nbsp;</span><!-- end ngRepeat: op in calc.ops track by $index --><input title="" type="button" value="+" class="btn calcBtn btn-info ng-scope" data-ng-click="onAdd({element: '+'})"><!-- end ngRepeat: op in calc.ops track by $index --><input title="Calculer ([ENTREE]) !" type="button" value="=" class="btn calcBtn rowspan btn-success ng-scope" data-ng-click="onAdd({element: '='})"><!-- end ngRepeat: op in calc.ops track by $index -->
+        </div><br><br><br>
+    </div>
+</div>
+</html>
