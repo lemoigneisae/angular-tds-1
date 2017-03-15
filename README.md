@@ -30,6 +30,45 @@
 ```sh
 Avancé de TD1_EX1 : 100%
 ```
+Objectifs : 
+
+- Créer un module et un contrôleur
+```sh
+angular.module('TD1', []);
+myApp.controller('controllerTD1', [{}]);
+```
+- Utiliser des directives Angular
+```sh
+data-ng-change, data-ng-model, etc
+```
+- Mettre en oeuvre le Data-binding
+```sh
+data-ng-model="tdCtrl.message"
+```
+- Utiliser un service ($cookies)
+```sh
+var myApp = angular.module('TD1', ['ngCookies']);
+myApp.controller('controllerTD1', ["$cookies",function($cookies){
+    // Retrieving a cookie
+    var favoriteCookie = $cookies.get('Message');
+}]);
+```
+
+Fonctionnalités :
+
+- Saisir une note (message textuel) et afficher le nombre de caractères restants (le message est limité à 100 caractères saisis)
+- Enregistrer (côté client en JS)
+- Effacer le contenu
+- Afficher les messages d'info (sauvegarde, modification…)
+- Gérer les changements de classe CSS sur l'affichage d'info
+
+Interface de l'application :
+
+[![N|Solid](http://slamwiki.kobject.net/_media/slam4/richclient/angularjs/ex1-note.png?cache=)](https://angularjs.org/)
+
+Difficultés rencontrées :
+
+Après un petit temps d'adaptation à ce nouveau language, cette première application a été plutôt facile à réaliser. Mon premier bloquage a été lors de l'inclusion du service $cookies. Mais maintenant que je sais comment faire cela est clair.
 
 #### TD1_EX2 : Choix de services
 
