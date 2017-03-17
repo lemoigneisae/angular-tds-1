@@ -284,41 +284,68 @@ Avancé de TD2_EX2 : 100%
 ```
 #### Objectifs : 
 
-- Créer un module et un contrôleur
+- Utiliser la directive ngRepeat
 ```sh
-Voir TD1_EX1
+<tr contact-elem class="animate-repeat ng-scope" data-ng-repeat="contact in tdCtrl.contacts |NotDeletedFilter |filter:q as results">
 ```
-- Utiliser des directives Angular
+- Utiliser la validation des formulaires
 ```sh
-Voir TD1_EX1
+<form name="frmContact" data-ng-submit="" novalidate="" class="ng-pristine ng-invalid ng-invalid-required ng-valid-email">
 ```
-- Mettre en oeuvre le Data-binding
+- Créer des directives simples 
 ```sh
-Voir TD1_EX1
-```
-- Utiliser un service ($http)
-```sh
+myApp.directive('frmContactElem', function() {
+    return {
+        templateUrl: './template/frmContacts.html'
+    };
+});
+
+<frm-contact-elem></frm-contact-elem>
 ```
 
 #### Fonctionnalités :
 
-- Sélectionner/désélectionner des services
+- Obtenir la liste des contacts et la filtrer
 ```sh
+<tr contact-elem class="animate-repeat ng-scope" data-ng-repeat="contact in tdCtrl.contacts |NotDeletedFilter |filter:q as results">
 ```
-- Calculer le montant dû
+- Ajouter un contact dans la liste
 ```sh
+this.Add = function(value){
+	if(value) {
+		if (self.edit == "add") {
+			self.contacts.push(self.tmpContact);
+            		self.tmpContact = new Object();
+        	} else {
+            		self.tmpContact = new Object();
+            		self.edit = "";
+        	}
+    	}
+};
 ```
-- Afficher le nombre de services sélectionnés
+- Modifier un contact existant
 ```sh
+this.toUpdate = function(contact){
+	self.edit="upd";
+        self.tmpContact = contact;
+};
+```
+- Supprimer un contact
+```sh
+this.deleter = function(contact){
+	self.results.push(contact);
+        contact.deleted = true;
+};
 ```
 
 #### Interface de l'application :
 
-[![N|Solid](http://slamwiki.kobject.net/_media/slam4/richclient/angularjs/td1-ex2-services.png?w=350&tok=2bd648)](http://slamwiki.kobject.net/slam4/richclient/angularjs/td1)
+[![N|Solid](http://slamwiki.kobject.net/_detail/slam4/richclient/angularjs/ex3.png?id=slam4%3Arichclient%3Aangularjs%3Atd2)](http://slamwiki.kobject.net/slam4/richclient/angularjs/td2)
 
 #### Difficultés rencontrées :
 
-Après m'être renseigné sur les nouvelles différentes directives (ng-pluralize, etc..) le projet fut un peu plus compliqué que l'EX1. En effet ma première difficulté fut d'importer un JSON via le service $http. Après avoir réussi à l'importer et utiliser les directives nécessaires pour tout afficher, ma seconde difficulté n'était pas sur de l'Angular directement mais plus sur de la syntaxe JavaScript. En effet ayant peu fait de JS le simple fait de push dans un tableau ou d'utiliser des objets fut une totale découverte.
+Ce TD fut scindé en deux pour moi. La partie ng-repeat a été réalisée en première. Puis un nouveau concept s'est découvert à moi la création de directives. Après avoir fait le cours et avoir posé des questions au prof, la création de nouvelles directives pour concaténer mon code n'avait plus de secret pour moi.
+
 ## TD3 : Service http et API
 
 ### TD3_EX1 : Convertisseur de devises
@@ -328,41 +355,56 @@ Avancé de TD3_EX1 : 65%
 ```
 #### Objectifs : 
 
-- Créer un module et un contrôleur
+- Utiliser des services Angular existants
 ```sh
-Voir TD1_EX1
+Voir TD précédents
 ```
-- Utiliser des directives Angular
+- Mettre en oeuvre l'injection de dépendance
 ```sh
-Voir TD1_EX1
-```
-- Mettre en oeuvre le Data-binding
-```sh
-Voir TD1_EX1
-```
-- Utiliser un service ($http)
-```sh
+myApp.controller('controllerTD2',['$http','$sce',function($http,$sce){
+	$http.get("./app/currencymap.json").then(
+        	function (response) {
+           		self.currencies = response.data;
+        	});
+}]);
 ```
 
 #### Fonctionnalités :
 
-- Sélectionner/désélectionner des services
+- Saisir un montant dans une devise source
 ```sh
+<input data-ng-model="tdCtrl.what" type="text" class="form-control ng-pristine ng-untouched ng-valid" size="5">
 ```
-- Calculer le montant dû
+- Sélectionner la devise cible
 ```sh
+<select data-ng-model="tdCtrl.from" data-ng-options="v.code as v.code + ' - ' + v.name for (k, v) in tdCtrl.currencies" class="form-control ng-pristine ng-untouched ng-valid">
 ```
-- Afficher le nombre de services sélectionnés
+- Calculer la conversion à partir des taux courants
 ```sh
+ this.getResult = function(){
+	url = $sce.trustAsResourceUrl('https://free.currencyconverterapi.com/api/v3/convert?compact=y&q='+self.from+'_'+self.to);
+        $http.jsonp(url, {jsonCallbackParam: 'callback'}).then(function(result){
+            self.amount=result.data[""+self.from+"_"+self.to+""].val;
+            self.result=self.amount*(self.what);
+        });
 ```
-
+- Effectuer l'opération inverse (échange des devises)
+```sh
+<a href="" data-ng-click="tdCtrl.swap()">↔</a>
+this.swap = function(){
+  var tmp = self.from;
+  self.from=self.to;
+  self.to=tmp;
+ };
+```
 #### Interface de l'application :
 
-[![N|Solid](http://slamwiki.kobject.net/_media/slam4/richclient/angularjs/td1-ex2-services.png?w=350&tok=2bd648)](http://slamwiki.kobject.net/slam4/richclient/angularjs/td1)
+[![N|Solid](http://slamwiki.kobject.net/_media/slam4/richclient/angularjs/ex4.png?w=600&tok=2cbd23)](http://slamwiki.kobject.net/slam4/richclient/angularjs/td3)
 
 #### Difficultés rencontrées :
 
-Après m'être renseigné sur les nouvelles différentes directives (ng-pluralize, etc..) le projet fut un peu plus compliqué que l'EX1. En effet ma première difficulté fut d'importer un JSON via le service $http. Après avoir réussi à l'importer et utiliser les directives nécessaires pour tout afficher, ma seconde difficulté n'était pas sur de l'Angular directement mais plus sur de la syntaxe JavaScript. En effet ayant peu fait de JS le simple fait de push dans un tableau ou d'utiliser des objets fut une totale découverte.
+Je pense que ce TD fut le plus dur que nous ayons dû réaliser pour l’instant. L’utilisation d’une API pour récupérer les devises en temps réel fut déjà une partie importante du TD en soit. Ensuite l’architecture même qui était demandée au niveau des tableau pour stocker les variables était compliquée à comprendre. La partie historique m’a posée beaucoup de problèmes à un point que je n’ai pas pu finir le TD.
+
 ## TD5 : Routage et multi-modules
 
 ### TD5_EX1 
